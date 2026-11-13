@@ -86,3 +86,6 @@ ntfs-3g
 cryptsetup
 zstd
 squashfs-tools
+
+# Desktop installer entry for Debian Live Installer
+debian-installer-launcher
