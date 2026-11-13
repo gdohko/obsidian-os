@@ -3,6 +3,7 @@ live-boot
 live-config
 live-config-systemd
 systemd-sysv
+linux-image-amd64
 sudo
 ca-certificates
 curl
@@ -28,7 +29,6 @@ dbus-user-session
 # KDE Plasma desktop
 kde-plasma-desktop
 sddm
-sddm-theme-debian-breeze
 plasma-nm
 plasma-pa
 dolphin
@@ -40,7 +40,6 @@ kde-spectacle
 kdeconnect
 breeze
 breeze-gtk-theme
-oxygen-sounds
 
 # Browser and essentials
 firefox-esr
@@ -76,9 +75,8 @@ lshw
 dmidecode
 smartmontools
 nvme-cli
-bluez
 
-# Filesystems, compression and persistence support
+# Filesystems
 btrfs-progs
 dosfstools
 exfatprogs
@@ -86,6 +84,3 @@ ntfs-3g
 cryptsetup
 zstd
 squashfs-tools
-
-# Desktop installer entry for Debian Live Installer
-debian-installer-launcher
