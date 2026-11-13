@@ -1,0 +1,16 @@
+#!/bin/sh
+set -eu
+THEME_DIR=/usr/share/plymouth/themes/obsidian
+mkdir -p "$THEME_DIR"
+if command -v rsvg-convert >/dev/null 2>&1; then
+  rsvg-convert -w 320 -h 320 /usr/share/obsidian/branding/obsidian-logo.svg -o "$THEME_DIR/obsidian-logo.png"
+fi
+if [ -f "$THEME_DIR/obsidian-logo.png" ]; then
+  if command -v plymouth-set-default-theme >/dev/null 2>&1; then
+    plymouth-set-default-theme obsidian
+  fi
+  if command -v update-initramfs >/dev/null 2>&1; then
+    update-initramfs -u
+  fi
+fi
+exit 0
