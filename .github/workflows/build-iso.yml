@@ -16,14 +16,20 @@ jobs:
   build:
     runs-on: ubuntu-24.04
     timeout-minutes: 360
-    container:
-      image: debian:trixie
     steps:
+      - name: Free runner disk space
+        run: |
+          df -h
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc \
+            /usr/local/share/powershell /usr/local/share/chromium \
+            /usr/local/lib/node_modules
+          sudo apt-get clean
+          df -h
       - name: Install build dependencies
         run: |
-          apt-get update
-          apt-get install -y --no-install-recommends \
-            ca-certificates live-build debootstrap xorriso squashfs-tools \
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            live-build debootstrap xorriso squashfs-tools \
             grub-pc-bin grub-efi-amd64-bin grub2-common isolinux syslinux-common \
             dosfstools mtools rsync git curl wget file python3
       - name: Checkout
@@ -34,13 +40,13 @@ jobs:
       - name: Build ISO
         env:
           OBSIDIAN_VERSION: 0.1.0
-        run: ./build-iso.sh
+        run: sudo env OBSIDIAN_VERSION="$OBSIDIAN_VERSION" ./build-iso.sh
       - name: Validate ISO boot catalog and checksum
         run: |
           ISO="$(find output -maxdepth 1 -name '*.iso' -print -quit)"
           test -n "$ISO"
-          ./scripts/validate-iso.sh "$ISO"
-          test -s "$ISO.sha256" || test -s "${ISO}.sha256"
+          sudo ./scripts/validate-iso.sh "$ISO"
+          test -s "${ISO}.sha256"
       - name: Upload ISO and checksum
         uses: actions/upload-artifact@v4
         with:
