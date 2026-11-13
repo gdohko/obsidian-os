@@ -1,0 +1,18 @@
+# Desert-inspired XFCE desktop and dock (KDE Plasma remains available)
+xfce4
+xfce4-goodies
+xfce4-whiskermenu-plugin
+xfce4-weather-plugin
+xfce4-pulseaudio-plugin
+xfce4-power-manager
+xfce4-screenshooter
+thunar
+thunar-archive-plugin
+thunar-volman
+xfce4-terminal
+plank
+picom
+network-manager-gnome
+papirus-icon-theme
+adwaita-icon-theme
+arc-theme
