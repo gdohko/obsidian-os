@@ -1,24 +1,30 @@
 # Obsidian OS
 
-Sistema operacional personalizado baseado em Debian 13 (Trixie), arquitetura AMD64, com KDE Plasma e Wayland.
+Distribuição Live em desenvolvimento baseada em Debian 13 (Trixie), AMD64, KDE Plasma e Wayland.
 
-## Objetivo
+## Build automatizado
 
-Construir uma distribuição Live para computadores x86-64, com suporte a inicialização BIOS/UEFI, desktop KDE Plasma, ferramentas essenciais, firmware disponível nos repositórios Debian e possibilidade de persistência em mídia USB.
+O workflow **Build Obsidian OS ISO** é acionado a cada push na branch `main` e também pode ser iniciado manualmente em **Actions → Build Obsidian OS ISO → Run workflow**.
 
-## Estado do projeto
+O artefato esperado é `obsidian-os-0.1.0-amd64.iso`, acompanhado de SHA-256. Considere a ISO produzida somente quando o workflow terminar com sucesso e o artefato estiver disponível.
 
-Este repositório está em fase inicial. A presença dos arquivos de configuração não significa que uma ISO já tenha sido compilada ou testada em hardware real.
+## Conteúdo inicial
 
-## Build
+- Debian 13 Trixie / amd64
+- KDE Plasma, SDDM, Dolphin e Konsole
+- Live boot híbrido para BIOS legado e UEFI
+- Firmware disponível nos repositórios Debian
+- Ferramentas de diagnóstico e suporte a sistemas de arquivos comuns
+- Identidade visual Obsidian e tema Plymouth para o carregamento do sistema
 
-O processo de build será documentado e automatizado por GitHub Actions. Consulte os workflows em `.github/workflows/` quando estiverem disponíveis.
+## Limitações da primeira versão
 
-## Escopo inicial
+Esta é uma imagem Live inicial para validação. Ainda não inclui instalador gráfico próprio, persistência USB pré-configurada, perfis de energia, ZRAM adaptativa, Waydroid, camada de jogos ou Obsidian Studio. Drivers NVIDIA proprietários não são instalados automaticamente. A compatibilidade precisa ser validada em máquinas físicas e virtuais.
 
-- Debian 13 Trixie / AMD64
-- KDE Plasma / Wayland
-- Imagem Live híbrida para BIOS e UEFI
-- Firmware e drivers disponíveis nos repositórios Debian
-- Verificação de integridade SHA-256
-- Evolução incremental dos recursos do Obsidian OS
+## Build local
+
+Em Debian Trixie amd64, com privilégios root, conexão à internet e espaço livre amplo (recomendado 30 GB):
+
+```bash
+./build-iso.sh
+```
