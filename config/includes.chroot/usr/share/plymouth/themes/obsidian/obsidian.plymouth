@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Obsidian OS
+Description=Obsidian OS branded boot splash
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/obsidian
+ScriptFile=/usr/share/plymouth/themes/obsidian/obsidian.script
