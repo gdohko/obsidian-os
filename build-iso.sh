@@ -34,7 +34,7 @@ lb config \
   --apt-recommends true \
   --apt-indices false \
   --memtest none \
-  --debian-installer false \
+  --debian-installer live \
   --iso-volume "OBSIDIAN_OS_${VERSION}" \
   --iso-application "Obsidian OS Live" \
   --iso-publisher "Obsidian OS Project" \
