@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Obsidian Compositor
+Exec=picom --backend glx --vsync
+OnlyShowIn=XFCE;
+X-GNOME-Autostart-enabled=true
