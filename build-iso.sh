@@ -29,7 +29,6 @@ lb config \
   --distribution "$DIST" \
   --architectures "$ARCH" \
   --binary-images iso-hybrid \
-  --bootloaders "grub-efi,syslinux" \
   --archive-areas "main contrib non-free non-free-firmware" \
   --apt-recommends true \
   --apt-indices false \
