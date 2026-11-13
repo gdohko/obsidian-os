@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Obsidian Dock
+Exec=plank
+OnlyShowIn=XFCE;
+X-GNOME-Autostart-enabled=true
