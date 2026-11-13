@@ -25,6 +25,8 @@ jobs:
             /usr/local/lib/node_modules
           sudo apt-get clean
           df -h
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Install build dependencies
         run: |
           sudo apt-get update
@@ -32,21 +34,22 @@ jobs:
             live-build debootstrap xorriso squashfs-tools \
             grub-pc-bin grub-efi-amd64-bin grub2-common isolinux syslinux-common \
             dosfstools mtools rsync git curl wget file python3
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Prepare permissions
+      - name: Validate shell scripts
         run: |
-          chmod +x build-iso.sh scripts/validate-iso.sh config/hooks/normal/*.hook.chroot
+          bash -n build-iso.sh
+          bash -n scripts/validate-iso.sh
       - name: Build ISO
         env:
           OBSIDIAN_VERSION: 0.1.0
-        run: sudo env OBSIDIAN_VERSION="$OBSIDIAN_VERSION" ./build-iso.sh
-      - name: Validate ISO boot catalog and checksum
+        run: sudo env OBSIDIAN_VERSION=0.1.0 ./build-iso.sh
+      - name: Validate ISO
         run: |
-          ISO="$(find output -maxdepth 1 -name '*.iso' -print -quit)"
+          ISO="$(find output -maxdepth 1 -type f -name '*.iso' -print -quit)"
           test -n "$ISO"
           sudo ./scripts/validate-iso.sh "$ISO"
           test -s "${ISO}.sha256"
+          sha256sum --check "${ISO}.sha256"
+          file "$ISO"
       - name: Upload ISO and checksum
         uses: actions/upload-artifact@v4
         with:
