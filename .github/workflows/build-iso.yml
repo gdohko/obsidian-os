@@ -1,0 +1,48 @@
+name: Build Obsidian OS ISO
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    container:
+      image: debian:trixie
+    steps:
+      - name: Install build dependencies
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            ca-certificates live-build debootstrap xorriso squashfs-tools \
+            grub-pc-bin grub-efi-amd64-bin grub2-common isolinux syslinux-common \
+            dosfstools mtools rsync git curl wget file python3
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Prepare permissions
+        run: |
+          chmod +x build-iso.sh scripts/validate-iso.sh config/hooks/normal/*.hook.chroot
+      - name: Build ISO
+        env:
+          OBSIDIAN_VERSION: 0.1.0
+        run: ./build-iso.sh
+      - name: Validate ISO boot catalog and checksum
+        run: |
+          ISO="$(find output -maxdepth 1 -name '*.iso' -print -quit)"
+          test -n "$ISO"
+          ./scripts/validate-iso.sh "$ISO"
+          test -s "$ISO.sha256" || test -s "${ISO}.sha256"
+      - name: Upload ISO and checksum
+        uses: actions/upload-artifact@v4
+        with:
+          name: obsidian-os-0.1.0-amd64-iso
+          path: |
+            output/*.iso
+            output/*.sha256
+          if-no-files-found: error
+          retention-days: 7
