@@ -13,6 +13,7 @@ O artefato esperado é `obsidian-os-0.1.0-amd64.iso`, acompanhado de SHA-256. Co
 - Debian 13 Trixie / amd64
 - KDE Plasma, SDDM, Dolphin e Konsole
 - Live boot híbrido para BIOS legado e UEFI
+- Debian Installer em modo Live e atalho de instalação no desktop
 - Firmware disponível nos repositórios Debian
 - Ferramentas de diagnóstico e suporte a sistemas de arquivos comuns
 - Identidade visual Obsidian e tema Plymouth para o carregamento do sistema
