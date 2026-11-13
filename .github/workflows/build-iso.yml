@@ -37,12 +37,12 @@ jobs:
       - name: Build ISO
         env:
           OBSIDIAN_VERSION: 0.1.0
-        run: sudo env OBSIDIAN_VERSION=0.1.0 ./build-iso.sh
+        run: sudo env OBSIDIAN_VERSION=0.1.0 bash ./build-iso.sh
       - name: Validate ISO
         run: |
           ISO="$(find output -maxdepth 1 -type f -name '*.iso' -print -quit)"
           test -n "$ISO"
-          sudo ./scripts/validate-iso.sh "$ISO"
+          sudo bash ./scripts/validate-iso.sh "$ISO"
           test -s "${ISO}.sha256"
           sha256sum --check "${ISO}.sha256"
           file "$ISO"
