@@ -1,0 +1,10 @@
+# Boot and splash assets
+plymouth
+plymouth-themes
+grub2-common
+grub-pc-bin
+grub-efi-amd64-bin
+shim-signed
+xorriso
+isolinux
+syslinux-common
