@@ -30,6 +30,7 @@ lb config \
   --architectures "$ARCH" \
   --binary-images iso-hybrid \
   --archive-areas "main contrib non-free non-free-firmware" \
+  --security false \
   --apt-recommends true \
   --apt-indices false \
   --memtest none \
