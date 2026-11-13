@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900">
+<defs><radialGradient id="g"><stop stop-color="#a855f7"/><stop offset=".55" stop-color="#54218a"/><stop offset="1" stop-color="#08070d"/></radialGradient><linearGradient id="s" x2="0" y2="1"><stop stop-color="#fff"/><stop offset=".55" stop-color="#c7b5df"/><stop offset="1" stop-color="#70518e"/></linearGradient></defs>
+<circle cx="450" cy="450" r="405" fill="#08070d" stroke="#8b5bb8" stroke-width="8"/><circle cx="450" cy="450" r="370" fill="none" stroke="#4e3567" stroke-width="3"/>
+<path d="M450 85 L478 205 L450 260 L422 205 Z M450 640 L478 710 L450 820 L422 710 Z M85 450 L205 422 L260 450 L205 478 Z M640 450 L710 422 L820 450 L710 478 Z" fill="url(#s)"/>
+<circle cx="450" cy="320" r="108" fill="none" stroke="url(#s)" stroke-width="30"/>
+<path d="M450 410 V730 M280 505 H620 M450 410 L450 740" fill="none" stroke="url(#s)" stroke-width="34" stroke-linecap="square"/>
+<path d="M450 30 V150 M450 750 V870 M30 450 H150 M750 450 H870" stroke="#a855f7" stroke-width="5" opacity=".8"/>
+<circle cx="450" cy="450" r="12" fill="#c084fc"/>
+</svg>
