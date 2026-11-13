@@ -24,6 +24,10 @@ Esta é uma imagem Live inicial para validação. Ainda não inclui instalador g
 
 ## Build local
 
+O workflow chama os scripts com Bash explicitamente para não depender do bit de execução preservado pelo GitHub Contents API.
+
+## Build local
+
 Em Debian Trixie amd64, com privilégios root, conexão à internet e espaço livre amplo (recomendado 30 GB):
 
 ```bash
