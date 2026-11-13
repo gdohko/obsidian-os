@@ -1,16 +1,10 @@
 name: Build Obsidian OS ISO
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
-
-concurrency:
-  group: obsidian-os-iso-${{ github.ref }}
-  cancel-in-progress: true
 
 jobs:
   build:
