@@ -28,7 +28,8 @@ lb config \
   --mirror-binary "http://deb.debian.org/debian/" \
   --security false \
   --linux-packages none \
-  --apt-recommends true \
+  # Avoid pulling live-config-sysvinit alongside systemd-sysv.
+  --apt-recommends false \
   --apt-indices false \
   --memtest none \
   --debian-installer live \
