@@ -17,6 +17,7 @@ for cmd in lb xorriso; do command -v "$cmd" >/dev/null || { echo "Missing depend
 rm -rf config/binary config/chroot config/bootstrap config/source
 lb clean --purge >/dev/null 2>&1 || true
 
+# Keep systemd as the only init implementation; avoid pulling live-config-sysvinit via Recommends.
 lb config \
   --mode debian \
   --distribution "$DIST" \
@@ -28,7 +29,6 @@ lb config \
   --mirror-binary "http://deb.debian.org/debian/" \
   --security false \
   --linux-packages none \
-  # Avoid pulling live-config-sysvinit alongside systemd-sysv.
   --apt-recommends false \
   --apt-indices false \
   --memtest none \
