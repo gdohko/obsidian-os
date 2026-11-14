@@ -25,10 +25,9 @@ lb config \
   --initsystem systemd \
   --binary-images iso-hybrid \
   --archive-areas "main contrib non-free non-free-firmware" \
-  --mirror-bootstrap "http://deb.debian.org/debian/" \
+  --mirror-bootstrap "http://deb.debian.org/debian" \
   --mirror-chroot "http://deb.debian.org/debian/" \
   --mirror-binary "http://deb.debian.org/debian/" \
-  --security false \
   --linux-packages none \
   --apt-recommends false \
   --apt-indices false \
