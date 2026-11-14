@@ -17,11 +17,12 @@ for cmd in lb xorriso; do command -v "$cmd" >/dev/null || { echo "Missing depend
 rm -rf config/binary config/chroot config/bootstrap config/source
 lb clean --purge >/dev/null 2>&1 || true
 
-# Keep systemd as the only init implementation; avoid pulling live-config-sysvinit via Recommends.
+# Force the systemd backend; live-build otherwise defaults to the conflicting sysvinit backend.
 lb config \
   --mode debian \
   --distribution "$DIST" \
   --architectures "$ARCH" \
+  --initsystem systemd \
   --binary-images iso-hybrid \
   --archive-areas "main contrib non-free non-free-firmware" \
   --mirror-bootstrap "http://deb.debian.org/debian/" \
