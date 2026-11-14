@@ -41,7 +41,7 @@ jobs:
           test -n "$ISO"
           sudo bash ./scripts/validate-iso.sh "$ISO"
           test -s "${ISO}.sha256"
-          sha256sum --check "${ISO}.sha256"
+          (cd output && sha256sum --check "$(basename "$ISO").sha256")
           file "$ISO"
       - name: Upload ISO and checksum
         uses: actions/upload-artifact@v4
