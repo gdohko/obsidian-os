@@ -17,7 +17,7 @@ for cmd in lb xorriso; do command -v "$cmd" >/dev/null || { echo "Missing depend
 rm -rf config/binary config/chroot config/bootstrap config/source
 lb clean --purge >/dev/null 2>&1 || true
 
-# Force the systemd backend; live-build otherwise defaults to the conflicting sysvinit backend.
+# Force the systemd backend and use the current Trixie security archive only.
 lb config \
   --mode debian \
   --distribution "$DIST" \
@@ -28,6 +28,7 @@ lb config \
   --mirror-bootstrap "http://deb.debian.org/debian" \
   --mirror-chroot "http://deb.debian.org/debian/" \
   --mirror-binary "http://deb.debian.org/debian/" \
+  --security false \
   --linux-packages none \
   --apt-recommends false \
   --apt-indices false \
