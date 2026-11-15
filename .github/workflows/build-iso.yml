@@ -24,9 +24,13 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
-            live-build debootstrap xorriso squashfs-tools \
+            debian-archive-keyring debootstrap xorriso squashfs-tools \
             grub-pc-bin grub-efi-amd64-bin grub2-common \
             dosfstools mtools rsync git curl wget file python3
+          echo "deb [signed-by=/usr/share/keyrings/debian-archive-keyring.gpg] https://deb.debian.org/debian trixie main" | sudo tee /etc/apt/sources.list.d/debian-live-build.list
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends live-build=1:20250505+deb13u1
+          sudo rm -f /etc/apt/sources.list.d/debian-live-build.list
       - name: Validate shell scripts
         run: |
           bash -n build-iso.sh
