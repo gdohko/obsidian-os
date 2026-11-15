@@ -12,7 +12,7 @@ O artefato esperado é `obsidian-os-0.1.0-amd64.iso`, acompanhado de SHA-256. Co
 
 - Debian 13 Trixie / amd64
 - KDE Plasma, SDDM, Dolphin e Konsole
-- Live boot híbrido para BIOS legado e UEFI
+- Live boot híbrido com GRUB para BIOS legado e UEFI
 - Firmware disponível nos repositórios Debian
 - Ferramentas de diagnóstico e suporte a sistemas de arquivos comuns
 - Identidade visual Obsidian e tema Plymouth para o carregamento do sistema
@@ -23,7 +23,7 @@ Para evitar a falha do live-build no Debian Trixie ao buscar o índice Contents 
 
 ## Build local
 
-O workflow chama os scripts com Bash explicitamente para não depender do bit de execução preservado pelo GitHub Contents API.
+O workflow usa GRUB para BIOS e UEFI e chama os scripts com Bash explicitamente para não depender do bit de execução preservado pelo GitHub Contents API.
 
 Em Debian Trixie amd64, com privilégios root, conexão à internet e espaço livre amplo (recomendado 30 GB):
 
