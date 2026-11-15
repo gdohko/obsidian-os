@@ -17,7 +17,10 @@ for cmd in lb xorriso; do command -v "$cmd" >/dev/null || { echo "Missing depend
 rm -rf config/binary config/chroot config/bootstrap config/source
 lb clean --purge >/dev/null 2>&1 || true
 
-# Force the systemd backend and use the current Trixie security archive only.
+# Force the systemd backend. Trixie publishes Contents indexes under each
+# component (for example main/Contents-amd64.gz), while the live-build
+# debian-installer stage still requests the obsolete suite-root path.
+# Disable the bundled Debian Installer until live-build supports this layout.
 lb config \
   --mode debian \
   --distribution "$DIST" \
@@ -33,7 +36,7 @@ lb config \
   --apt-recommends false \
   --apt-indices false \
   --memtest none \
-  --debian-installer live \
+  --debian-installer false \
   --iso-volume "OBSIDIAN_OS_${VERSION}" \
   --iso-application "Obsidian OS Live" \
   --iso-publisher "Obsidian OS Project" \
