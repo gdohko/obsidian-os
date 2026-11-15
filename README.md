@@ -13,20 +13,17 @@ O artefato esperado é `obsidian-os-0.1.0-amd64.iso`, acompanhado de SHA-256. Co
 - Debian 13 Trixie / amd64
 - KDE Plasma, SDDM, Dolphin e Konsole
 - Live boot híbrido para BIOS legado e UEFI
-- Debian Installer em modo Live e atalho de instalação no desktop
 - Firmware disponível nos repositórios Debian
 - Ferramentas de diagnóstico e suporte a sistemas de arquivos comuns
 - Identidade visual Obsidian e tema Plymouth para o carregamento do sistema
 
 ## Limitações da primeira versão
 
-Esta é uma imagem Live inicial para validação. Ainda não inclui instalador gráfico próprio, persistência USB pré-configurada, perfis de energia, ZRAM adaptativa, Waydroid, camada de jogos ou Obsidian Studio. Drivers NVIDIA proprietários não são instalados automaticamente. A compatibilidade precisa ser validada em máquinas físicas e virtuais.
+Para evitar a falha do live-build no Debian Trixie ao buscar o índice Contents no caminho antigo, a primeira ISO não incorpora o Debian Installer. Esta versão é uma imagem Live inicial para validação, ainda sem instalador gráfico próprio, instalador Debian integrado, persistência USB pré-configurada, perfis de energia, ZRAM adaptativa, Waydroid, camada de jogos ou Obsidian Studio. Drivers NVIDIA proprietários não são instalados automaticamente. A compatibilidade precisa ser validada em máquinas físicas e virtuais.
 
 ## Build local
 
 O workflow chama os scripts com Bash explicitamente para não depender do bit de execução preservado pelo GitHub Contents API.
-
-## Build local
 
 Em Debian Trixie amd64, com privilégios root, conexão à internet e espaço livre amplo (recomendado 30 GB):
 
