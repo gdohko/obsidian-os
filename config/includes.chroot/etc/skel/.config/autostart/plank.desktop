@@ -1,5 +1,4 @@
 [Desktop Entry]
 Type=Application
 Name=Plank Dock
-Exec=plank
-OnlyShowIn=XFCE;
+Hidden=true

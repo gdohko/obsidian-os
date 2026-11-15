@@ -1,6 +1,6 @@
 # Obsidian OS
 
-Distribuição Live em desenvolvimento baseada em Debian 13 (Trixie), AMD64, KDE Plasma e Wayland.
+Distribuição Live em desenvolvimento baseada em Debian 13 (Trixie), AMD64 e KDE Plasma 6 sobre Wayland.
 
 ## Build automatizado
 
@@ -10,12 +10,16 @@ O artefato esperado é `obsidian-os-0.1.0-amd64.iso`, acompanhado de SHA-256. Co
 
 ## Conteúdo inicial
 
-- Debian 13 Trixie / amd64
-- KDE Plasma, SDDM, Dolphin e Konsole
+- Debian 13 Trixie / AMD64, kernel Debian e sessão Live com SDDM
+- KDE Plasma 6 Wayland como sessão padrão; XFCE disponível como sessão alternativa
+- Layout inicial Obsidian: barra superior Plasma com lançador, tarefas, bandeja do sistema e relógio; dock Plank inferior
+- Identidade Desert/Obsidian: papel de parede de dunas, esquema escuro Breeze e logotipo do projeto
+- Dolphin como gerenciador de arquivos, Konsole, Ark, Kate, Firefox ESR e utilitários multimídia
+- Tema Plymouth Obsidian durante o carregamento
 - Live boot híbrido com GRUB para BIOS legado e UEFI
-- Firmware disponível nos repositórios Debian
-- Ferramentas de diagnóstico e suporte a sistemas de arquivos comuns
-- Identidade visual Obsidian e tema Plymouth para o carregamento do sistema
+- Firmware disponível nos repositórios Debian e ferramentas de diagnóstico e suporte a sistemas de arquivos comuns
+
+O layout Plasma é aplicado no primeiro login por um script idempotente. O dock Plank usa XWayland; o compositor Picom fica restrito à sessão XFCE.
 
 ## Limitações da primeira versão
 
@@ -25,7 +29,7 @@ Para evitar a falha do live-build no Debian Trixie ao buscar o índice Contents 
 
 O workflow usa GRUB para BIOS e UEFI e chama os scripts com Bash explicitamente para não depender do bit de execução preservado pelo GitHub Contents API.
 
-Em Debian Trixie amd64, com privilégios root, conexão à internet e espaço livre amplo (recomendado 30 GB):
+Em Debian Trixie AMD64, com privilégios root, conexão à internet e espaço livre amplo (recomendado 30 GB):
 
 ```bash
 ./build-iso.sh

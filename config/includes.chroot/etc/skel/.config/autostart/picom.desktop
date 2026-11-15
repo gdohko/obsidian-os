@@ -1,5 +1,4 @@
 [Desktop Entry]
 Type=Application
 Name=Picom Compositor
-Exec=picom --backend glx --vsync
-OnlyShowIn=XFCE;
+Hidden=true

@@ -27,7 +27,7 @@ gvfs-backends
 polkitd
 dbus-user-session
 
-# KDE Plasma desktop
+# KDE Plasma Wayland desktop
 kde-plasma-desktop
 sddm
 plasma-nm
@@ -41,6 +41,8 @@ kde-spectacle
 kdeconnect
 breeze
 breeze-gtk-theme
+xwayland
+qdbus-qt6
 
 # Browser and essentials
 firefox-esr

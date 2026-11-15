@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Obsidian Plasma Desktop Setup
+Comment=Apply the Obsidian OS panel, wallpaper and dark color scheme
+Exec=/bin/sh /usr/share/obsidian/desktop/obsidian-plasma-setup.sh
+OnlyShowIn=KDE;
+X-GNOME-Autostart-enabled=true
