@@ -17,16 +17,18 @@ for cmd in lb xorriso; do command -v "$cmd" >/dev/null || { echo "Missing depend
 rm -rf config/binary config/chroot config/bootstrap config/source
 lb clean --purge >/dev/null 2>&1 || true
 
-# Force the systemd backend. Trixie publishes Contents indexes under each
-# component (for example main/Contents-amd64.gz), while the live-build
-# debian-installer stage still requests the obsolete suite-root path.
-# Disable the bundled Debian Installer until live-build supports this layout.
+# Use GRUB for both legacy BIOS and UEFI. The Debian Trixie live-build
+# syslinux stage fails while creating binary/isolinux/bootlogo on this
+# minimal profile, even though the ISO does not need the Syslinux menu.
+# GRUB's BIOS and EFI bootloaders provide the same dual-firmware support
+# without invoking the failing lb_binary_syslinux stage.
 lb config \
   --mode debian \
   --distribution "$DIST" \
   --architectures "$ARCH" \
   --initsystem systemd \
   --binary-images iso-hybrid \
+  --bootloaders "grub-pc grub-efi" \
   --archive-areas "main contrib non-free non-free-firmware" \
   --mirror-bootstrap "http://deb.debian.org/debian" \
   --mirror-chroot "http://deb.debian.org/debian/" \
