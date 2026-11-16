@@ -1,0 +1,23 @@
+#!/bin/sh
+set -eu
+
+# Install the official Hydra Launcher Debian package for Debian 13 AMD64.
+# Pin the release and verify its published SHA-256 digest before installation.
+HYDRA_VERSION=4.4.1
+HYDRA_DEB="hydralauncher_${HYDRA_VERSION}_amd64.deb"
+HYDRA_URL="https://github.com/hydralauncher/hydra/releases/download/v${HYDRA_VERSION}/${HYDRA_DEB}"
+HYDRA_SHA256=0527fe3fec945b3463f14d7b61a6ff12f76215b9e5d3ba338a677d0c20c92cb8
+WORK="$(mktemp -d)"
+trap 'rm -rf "$WORK"' EXIT
+
+command -v curl >/dev/null 2>&1 || { echo "curl is required to install Hydra Launcher" >&2; exit 1; }
+curl --fail --location --retry 3 --retry-delay 2 "$HYDRA_URL" -o "$WORK/$HYDRA_DEB"
+echo "$HYDRA_SHA256  $WORK/$HYDRA_DEB" | sha256sum --check --status || {
+  echo "Hydra Launcher package checksum verification failed" >&2
+  exit 1
+}
+
+apt-get update
+apt-get install --yes "$WORK/$HYDRA_DEB"
+rm -rf /var/lib/apt/lists/*
+echo "Hydra Launcher ${HYDRA_VERSION} installed and checksum verified."
