@@ -5,8 +5,8 @@ cd "$ROOT"
 export DEBIAN_FRONTEND=noninteractive
 ARCH=amd64
 DIST=trixie
-IMAGE_NAME=obsidian-os
-VERSION="${OBSIDIAN_VERSION:-0.1.0}"
+IMAGE_NAME=sapphire-os
+VERSION="${SAPPHIRE_VERSION:-0.1.0}"
 OUT_DIR="$ROOT/output"
 mkdir -p "$OUT_DIR"
 
@@ -39,11 +39,11 @@ lb config \
   --apt-indices false \
   --memtest none \
   --debian-installer false \
-  --iso-volume "OBSIDIAN_OS_${VERSION}" \
-  --iso-application "Obsidian OS Live" \
-  --iso-publisher "Obsidian OS Project" \
+  --iso-volume "SAPPHIRE_OS_${VERSION}" \
+  --iso-application "Sapphire OS Live" \
+  --iso-publisher "Sapphire OS Project" \
   --iso-preparer "live-build" \
-  --bootappend-live "boot=live components quiet splash username=obsidian hostname=obsidian"
+  --bootappend-live "boot=live components quiet splash username=sapphire hostname=sapphire"
 
 lb build 2>&1 | tee "$OUT_DIR/build.log"
 ISO="$(find "$ROOT" -maxdepth 1 -type f -name '*.iso' -print -quit)"
