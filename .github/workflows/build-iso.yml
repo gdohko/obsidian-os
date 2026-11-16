@@ -1,4 +1,4 @@
-name: Build Obsidian OS ISO
+name: Build Sapphire OS ISO
 
 on:
   push:
@@ -37,8 +37,8 @@ jobs:
           bash -n scripts/validate-iso.sh
       - name: Build ISO
         env:
-          OBSIDIAN_VERSION: 0.1.0
-        run: sudo env OBSIDIAN_VERSION=0.1.0 bash ./build-iso.sh
+          SAPPHIRE_VERSION: 0.1.0
+        run: sudo env SAPPHIRE_VERSION=0.1.0 bash ./build-iso.sh
       - name: Validate ISO
         run: |
           ISO="$(find output -maxdepth 1 -type f -name '*.iso' -print -quit)"
@@ -50,7 +50,7 @@ jobs:
       - name: Upload ISO and checksum
         uses: actions/upload-artifact@v4
         with:
-          name: obsidian-os-0.1.0-amd64-iso
+          name: sapphire-os-0.1.0-amd64-iso
           path: |
             output/*.iso
             output/*.sha256
