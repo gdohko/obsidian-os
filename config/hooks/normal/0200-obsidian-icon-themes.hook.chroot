@@ -1,0 +1,36 @@
+#!/bin/sh
+set -eu
+
+WORK="$(mktemp -d)"
+trap 'rm -rf "$WORK"' EXIT
+ICON_DIR=/usr/share/icons
+mkdir -p "$ICON_DIR"
+
+clone_theme() {
+  url="$1"
+  dir="$2"
+  git clone --depth 1 "$url" "$WORK/$dir"
+}
+
+# Kora is the default icon theme. Install both blue and grey folder variants.
+clone_theme https://github.com/bikass/kora.git kora
+cp -a "$WORK/kora/kora" "$ICON_DIR/Kora"
+cp -a "$WORK/kora/kora-pgrey" "$ICON_DIR/Kora-PGrey"
+
+# Optional alternatives exposed in KDE and XFCE appearance settings.
+clone_theme https://github.com/PlagaMedicum/PlagueSur-icon-theme.git plaguesur
+cp -a "$WORK/plaguesur" "$ICON_DIR/PlagueSur"
+
+clone_theme https://github.com/SylEleuth/gruvbox-plus-icon-pack.git gruvbox
+cp -a "$WORK/gruvbox/Gruvbox-Plus-Dark" "$ICON_DIR/Gruvbox-Plus-Dark"
+
+clone_theme https://github.com/vinceliuice/Tela-icon-theme.git tela
+chmod +x "$WORK/tela/install.sh"
+"$WORK/tela/install.sh" -d "$ICON_DIR" brown
+
+# Refresh icon caches when available.
+if command -v gtk-update-icon-cache >/dev/null 2>&1; then
+  for theme in Kora Kora-PGrey PlagueSur Gruvbox-Plus-Dark Tela-brown-dark; do
+    [ ! -d "$ICON_DIR/$theme" ] || gtk-update-icon-cache -f "$ICON_DIR/$theme" >/dev/null 2>&1 || true
+  done
+fi
