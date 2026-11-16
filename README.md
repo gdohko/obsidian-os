@@ -16,10 +16,11 @@ O artefato esperado é `obsidian-os-0.1.0-amd64.iso`, acompanhado de SHA-256. Co
 - Identidade Desert/Obsidian: papel de parede de dunas, esquema escuro Breeze e logotipo do projeto
 - Dolphin como gerenciador de arquivos, Konsole, Ark, Kate, Firefox ESR e utilitários multimídia
 - Tema Plymouth Obsidian durante o carregamento
+- Hydra Launcher 4.4.1 para AMD64, instalado a partir do pacote `.deb` oficial do projeto e com SHA-256 verificado durante a compilação; disponível no menu de aplicativos nas sessões KDE Plasma e XFCE
 - Live boot híbrido com GRUB para BIOS legado e UEFI
 - Firmware disponível nos repositórios Debian e ferramentas de diagnóstico e suporte a sistemas de arquivos comuns
 
-O layout Plasma é aplicado no primeiro login por um script idempotente. O dock Plank usa XWayland; o compositor Picom fica restrito à sessão XFCE.
+O Hydra Launcher é instalado por um hook do live-build, com versão fixada e verificação SHA-256 antes da instalação; suas dependências são resolvidas pelo APT. O layout Plasma é aplicado no primeiro login por um script idempotente. O dock Plank usa XWayland; o compositor Picom fica restrito à sessão XFCE.
 
 ## Limitações da primeira versão
 
