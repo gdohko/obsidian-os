@@ -1,0 +1,13 @@
+[Plugins]
+blurEnabled=true
+contrastEnabled=true
+translucencyEnabled=true
+
+[Effect-blur]
+BlurStrength=8
+NoiseStrength=2
+
+[Effect-translucency]
+MoveResize=85
+Dialogs=90
+Inactive=92
