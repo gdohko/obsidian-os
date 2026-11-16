@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Application
-Name=Obsidian Compositor
-Exec=picom --backend glx --vsync
+Name=Obsidian Glass Compositor
+Comment=Translucency, background blur and shadows for Obsidian OS
+Exec=picom --config %h/.config/picom.conf --backend glx --vsync
 OnlyShowIn=XFCE;
 X-GNOME-Autostart-enabled=true
