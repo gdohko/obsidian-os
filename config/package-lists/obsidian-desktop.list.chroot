@@ -44,6 +44,9 @@ breeze-gtk-theme
 xwayland
 qdbus-qt6
 
+# Icon themes
+papirus-icon-theme
+
 # Browser and essentials
 firefox-esr
 fonts-noto
