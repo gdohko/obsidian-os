@@ -1,21 +1,21 @@
-# Obsidian OS
+# Sapphire OS
 
 Distribuição Live em desenvolvimento baseada em Debian 13 (Trixie), AMD64 e KDE Plasma 6 sobre Wayland.
 
 ## Build automatizado
 
-O workflow **Build Obsidian OS ISO** é acionado a cada push na branch `main` e também pode ser iniciado manualmente em **Actions → Build Obsidian OS ISO → Run workflow**.
+O workflow **Build Sapphire OS ISO** é acionado a cada push na branch `main` e também pode ser iniciado manualmente em **Actions → Build Sapphire OS ISO → Run workflow**.
 
-O artefato esperado é `obsidian-os-0.1.0-amd64.iso`, acompanhado de SHA-256. Considere a ISO produzida somente quando o workflow terminar com sucesso e o artefato estiver disponível.
+O artefato esperado é `sapphire-os-0.1.0-amd64.iso`, acompanhado de SHA-256. Considere a ISO produzida somente quando o workflow terminar com sucesso e o artefato estiver disponível.
 
 ## Conteúdo inicial
 
 - Debian 13 Trixie / AMD64, kernel Debian e sessão Live com SDDM
 - KDE Plasma 6 Wayland como sessão padrão; XFCE disponível como sessão alternativa
-- Layout inicial Obsidian: barra superior Plasma com lançador, tarefas, bandeja do sistema e relógio; dock Plank inferior
-- Identidade Desert/Obsidian: papel de parede de dunas, esquema escuro Breeze e logotipo do projeto
+- Layout Sapphire: barra superior Plasma com lançador, tarefas, bandeja do sistema e relógio; dock Plank inferior
+- Identidade visual Sapphire: papel de parede de dunas, esquema escuro Breeze e logotipo do projeto
 - Dolphin como gerenciador de arquivos, Konsole, Ark, Kate, Firefox ESR e utilitários multimídia
-- Tema Plymouth Obsidian durante o carregamento
+- Tema Plymouth Sapphire durante o carregamento
 - Hydra Launcher 4.4.1 para AMD64, instalado a partir do pacote `.deb` oficial do projeto e com SHA-256 verificado durante a compilação; disponível no menu de aplicativos nas sessões KDE Plasma e XFCE
 - Live boot híbrido com GRUB para BIOS legado e UEFI
 - Firmware disponível nos repositórios Debian e ferramentas de diagnóstico e suporte a sistemas de arquivos comuns
@@ -24,7 +24,7 @@ O Hydra Launcher é instalado por um hook do live-build, com versão fixada e ve
 
 ## Limitações da primeira versão
 
-Para evitar a falha do live-build no Debian Trixie ao buscar o índice Contents no caminho antigo, a primeira ISO não incorpora o Debian Installer. Esta versão é uma imagem Live inicial para validação, ainda sem instalador gráfico próprio, instalador Debian integrado, persistência USB pré-configurada, perfis de energia, ZRAM adaptativa, Waydroid, camada de jogos ou Obsidian Studio. Drivers NVIDIA proprietários não são instalados automaticamente. A compatibilidade precisa ser validada em máquinas físicas e virtuais.
+Para evitar a falha do live-build no Debian Trixie ao buscar o índice Contents no caminho antigo, a primeira ISO não incorpora o Debian Installer. Esta versão é uma imagem Live inicial para validação, ainda sem instalador gráfico próprio, instalador Debian integrado, persistência USB pré-configurada, perfis de energia, ZRAM adaptativa, Waydroid, camada de jogos ou Sapphire Studio. Drivers NVIDIA proprietários não são instalados automaticamente. A compatibilidade precisa ser validada em máquinas físicas e virtuais.
 
 ## Build local
 
