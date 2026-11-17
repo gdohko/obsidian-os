@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Sapphire OS
+Description=Sapphire OS branded boot splash
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/sapphire
+ScriptFile=/usr/share/plymouth/themes/sapphire/sapphire.script

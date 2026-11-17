@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Name=Obsidian Dock
+Name=Sapphire Dock
 Exec=plank
 OnlyShowIn=KDE;XFCE;
 X-GNOME-Autostart-enabled=true

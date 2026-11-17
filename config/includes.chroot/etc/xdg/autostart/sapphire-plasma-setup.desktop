@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Sapphire Plasma Desktop Setup
+Comment=Apply the Sapphire OS panel, wallpaper and dark color scheme
+Exec=/bin/sh /usr/share/sapphire/desktop/sapphire-plasma-setup.sh
+OnlyShowIn=KDE;
+X-GNOME-Autostart-enabled=true

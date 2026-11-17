@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Name=Obsidian Glass Dock
+Name=Sapphire Glass Dock
 Comment=Floating translucent application dock
 Exec=plank
 X-GNOME-Autostart-enabled=true
