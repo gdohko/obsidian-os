@@ -14,7 +14,7 @@ jobs:
   capture:
     if: github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main')
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 45
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -42,13 +42,12 @@ jobs:
       - name: Boot Sapphire OS and capture KDE / XFCE
         run: |
           mkdir -p screenshots
-          if [ -e /dev/kvm ]; then
-            ACCEL=(-enable-kvm)
-          else
-            ACCEL=(-accel tcg,thread=multi)
-          fi
-          qemu-system-x86_64 "${ACCEL[@]}" \
-            -machine q35 -m 6144 -smp 4 -vga std \
+          # GitHub-hosted runners may expose /dev/kvm without granting the
+          # workflow permission to use it. Force software emulation (TCG).
+          qemu-system-x86_64 \
+            -machine q35,accel=tcg \
+            -cpu max -m 4096 -smp 2 \
+            -vga std \
             -cdrom "$ISO_PATH" -boot d \
             -display none -vnc 127.0.0.1:0 \
             -netdev user,id=net0 -device virtio-net-pci,netdev=net0 \
