@@ -1,0 +1,71 @@
+name: Capture Sapphire OS Desktop
+
+on:
+  workflow_run:
+    workflows: ["Build Sapphire OS ISO"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  capture:
+    if: github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download the ISO artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            RUN_ID="$(gh run list --workflow build-iso.yml --branch main --status success --limit 1 --json databaseId --jq '.[0].databaseId')"
+          fi
+          test -n "$RUN_ID"
+          gh run download "$RUN_ID" --repo "$GITHUB_REPOSITORY" --name sapphire-os-0.1.0-amd64-iso --dir artifacts
+          ISO="$(find artifacts -type f -name '*.iso' -print -quit)"
+          test -n "$ISO"
+          echo "ISO_PATH=$ISO" >> "$GITHUB_ENV"
+
+      - name: Install virtual machine and VNC tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends qemu-system-x86
+          python3 -m pip install --user --break-system-packages vncdotool
+
+      - name: Boot Sapphire OS and capture KDE / XFCE
+        run: |
+          mkdir -p screenshots
+          if [ -e /dev/kvm ]; then
+            ACCEL=(-enable-kvm)
+          else
+            ACCEL=(-accel tcg,thread=multi)
+          fi
+          qemu-system-x86_64 "${ACCEL[@]}" \
+            -machine q35 -m 6144 -smp 4 -vga std \
+            -cdrom "$ISO_PATH" -boot d \
+            -display none -vnc 127.0.0.1:0 \
+            -netdev user,id=net0 -device virtio-net-pci,netdev=net0 \
+            -no-reboot -no-shutdown \
+            >qemu.log 2>&1 &
+          echo $! > qemu.pid
+          trap 'kill "$(cat qemu.pid)" 2>/dev/null || true' EXIT
+          export PATH="$HOME/.local/bin:$PATH"
+          python3 scripts/capture-desktop.py
+
+      - name: Upload desktop screenshots and VM logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sapphire-os-desktop-screenshots
+          path: |
+            screenshots/
+            qemu.log
+          if-no-files-found: warn
+          retention-days: 14
